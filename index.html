@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ContactHub - Smart Contact Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+      <link rel="stylesheet" href="./CSS/bootstrap.min.css" />
+    <link rel="stylesheet" href="./CSS/all.css" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+</head>
+<body>
+<nav class="navbar navbar-expand-lg header-links fixed-top z-2 px-md-4 py-md-3 p-0">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <div class="d-flex">
+        <div class="logo d-flex justify-content-center align-items-center">
+          <i class="fa-solid fa-address-book text-white "></i>
+        </div>
+        <div>
+          <h1 class="m-md-0 mt-2">Contact<span style="width: 40px;">Hub</span></h1>
+          <p class="m-0 d-none d-md-block">Smart Contact Manager</p>
+        </div>
+      </div>
+    </a>
+    <div class="d-flex">
+<button type="button" class="btn btn-add text-white " data-bs-toggle="modal" data-bs-target="#messageModal">
+  <i class="fa-solid fa-plus"></i>
+  Add <span class="d-none d-md-inline-block">Contact</span>
+</button>
+
+<div class="nav-icons d-none d-md-block">
+  <button class="btn"><i class="fa-solid fa-bell"></i></button>
+  <button class="btn"><i class="fa-solid fa-gear"></i></button>
+</div>
+<div>
+  <img src="./images/avatar-4.jpg" alt="user" class="user-img ">
+</div>
+</div>
+
+  </div>
+</nav>
+<div class="modal modal-form fade" id="messageModal" tabindex="0" aria-labelledby="messageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header px-4 py-3 rounded-top-4">
+        <h5 class="modal-title" id="messageModalLabel">Add New Contact</h5>
+        <button type="button" class="btn-close" onclick="closeModal()"></button>
+      </div>
+      <div class="modal-body p-4 rounded-4">
+        <div class="user-icon rounded-circle mx-auto text-white d-flex justify-content-center align-items-center">
+          <i class="fa-solid fa-user fs-3" id="user"></i>
+          <img id="previewImage" src="" alt="" class="w-100 rounded-5 d-none" style="object-fit:cover">
+          <div id="user-name" class="w-100 h-100 rounded-circle d-none d-flex justify-content-center align-items-center text-white fs-3"></div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <label for="person-image" class="label-user py-2 px-3 rounded-3">
+            <i class="fa-solid fa-camera"></i>
+            <span>Change Photo</span>
+          </label>
+          <input type="file" id="person-image" class="d-none" onchange="image()">
+        </div>
+        <div class="modal-label">
+          <label for="fn" class="form-label">Full Name <span>*</span></label>
+          <input oninput="validName()" type="text" class="form-control modal-input" id="fn" placeholder="Enter Full Name " required>
+          <p class="d-none error" id="error-name">Name should contain only letters and spaces (2-50 characters)</p>
+        </div>
+        <div class="modal-label">
+          <label for="number" class="form-label">Phone Number  <span>*</span></label>
+          <input type="tel" oninput="validNumber()" class="form-control modal-input" id="number" placeholder="e.g., 01012345678 " required>
+          <p class="d-none error" id="error-number">Please enter a valid Egyptian phone number</p>
+        </div>
+        <div class="modal-label">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" oninput="validEmail()" class="form-control modal-input" id="email" placeholder="name@example.com ">
+          <p class="d-none error" id="error-email">Please enter a valid email address</p>
+        </div>
+        <div class="modal-label">
+          <label for="address" class="form-label">Address</label>
+          <input type="text" class="form-control modal-input" id="address" placeholder="Enter address">
+        </div>
+        <div class="modal-label">
+          <label for="group" class="form-label">Group</label>
+          <select class="form-select" aria-label="Default select example" aria-placeholder="Select a group" id="group">
+            <option selected>Select a group</option>
+            <option value="1">Family</option>
+            <option value="2">Friends</option>
+            <option value="3">Work</option>
+            <option value="4">School</option>
+            <option value="5">Other</option>
+          </select>
+        </div>
+        <div class="modal-label">
+          <label for="messageText" class="form-label">Notes</label>
+          <textarea class="form-control modal-textarea" id="messageText" rows="2" placeholder="Add notes about this contact"></textarea>
+        </div>
+        <div class="d-flex mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="Favorite" id="checkDefault">
+            <label class="form-check-label" for="checkDefault">
+              <i class="fa-solid fa-star me-1 modal-fav-icon"></i>
+              Favorite
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input emergency-input" type="checkbox" value="Emergency" id="checkChecked">
+            <label class="form-check-label" for="checkChecked">
+              <i class="fa-solid fa-heart-pulse me-1 modal-emergency-icon"></i>
+              Emergency
+            </label>
+          </div>
+        </div>
+        <div class="d-flex flex-column-reverse flex-md-row justify-content-md-end">
+        <button type="button" class="btn btn-cancel btn-modal" onclick="closeModal()">Cancel</button>
+        <button type="button" class="btn btn-save text-white btn-modal" id="sendBtn" onclick="addPerson()"><i class="fa-solid fa-check me-2"></i>Save Contact</button>
+        <button type="button" class="btn btn-save d-none text-white btn-modal" id="saveBtn" onclick="save()"><i class="fa-solid fa-check me-2"></i>Save Contact</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="container">
+    <div class="row g-3 stats" id="count">
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-9">
+        <div>
+          <div class="content" id="content">
+          </div>
+          <div class="search mb-4 position-relative">
+            <input
+            oninput="displayPerson()"
+            id="searchInput"
+            type="search"
+            class="form-control form-search w-100"
+            placeholder="Search by name, phone, or email..."
+          />
+          <i class="fa-solid fa-magnifying-glass position-absolute icon-search"></i>
+          </div>
+          <div class="row g-3" id="data">
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-3 mt-4 mt-lg-0">
+        <div class="position-sticky g">
+          <div class="favorite rounded-4">
+            <div class="d-flex favorite-top rounded-top-4">
+              <div class="icon icon-star d-flex justify-content-center align-items-center rounded-3">
+              <i class="fa-solid fa-star text-white"></i>
+          </div>
+              <div>
+                <h2 class="m-0">Favorites</h2>
+                <p class="m-0">Quick access to starred contacts</p>
+              </div>
+            </div>
+            <div id="favorite-bottom" class=" bg-white rounded-bottom-4 favorite-bottom">
+            </div>
+          </div>
+          <div class="emergency rounded-4">
+            <div class="d-flex emergency-top rounded-top-4">
+              <div class="icon icon-heart d-flex justify-content-center align-items-center rounded-3">
+              <i class="fa-solid fa-heart-pulse text-white"></i>
+          </div>
+              <div>
+                <h2 class="m-0">Emergency</h2>
+                <p class="m-0">Important contacts for urgent calls</p>
+              </div>
+            </div>
+            <div id="emergency-bottom" class=" bg-white rounded-bottom-4 emergency-bottom">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./js/style.js"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
