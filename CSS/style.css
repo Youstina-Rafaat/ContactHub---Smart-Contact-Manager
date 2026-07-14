@@ -98,7 +98,6 @@ h1 span{
 
 .modal-form{
   max-height: 780px;
-  overflow-y: scroll;
 }
 h5{
   font-size: 20px;
@@ -470,7 +469,7 @@ h3{
   max-height: 323px;
   overflow-y: scroll;
 }
-.favorite-bottom::-webkit-scrollbar,.emergency-bottom::-webkit-scrollbar,.modal-dialog-scrollable::-webkit-scrollbar{
+.favorite-bottom::-webkit-scrollbar,.emergency-bottom::-webkit-scrollbar,.modal-body::-webkit-scrollbar{
   width: 0px;
 }
 .favorite-bottom .item,.emergency-bottom .item{
