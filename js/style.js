@@ -187,7 +187,22 @@ function displayPerson(){
         `
     }
   }
-    document.getElementById("data").innerHTML=box
+
+  if(box == ""){
+    box = `
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center py-5 my-5 px-0">
+              <div class="icon-no-contant d-flex justify-content-center align-items-center rounded-4 mb-3">
+                <i class="fa-solid fa-address-book d-flex justify-content-center align-items-center"></i>
+              </div>
+              <div class="text-center" >
+                <p class="no-contant mb-1">No contacts found</p>
+                <p class="get-start m-0">Click "Add Contact" to get started</p>
+              </div>
+            </div>
+    `
+  }
+
+  document.getElementById("data").innerHTML=box
 }
 function image(){
   if(imageInput.files[0]){

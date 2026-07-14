@@ -238,6 +238,21 @@ textarea{
 .content{
   margin-bottom: 20px;
 }
+.icon-no-contant{
+  width: 80px;
+  height: 80px;
+  background-color: #F3F4F6;
+  color: #D1D5DC;
+  font-size: 30px;
+}
+.no-contant{
+  color: #6a7282;
+  font-weight: 500;
+}
+.get-start{
+  color: #99a1af;
+  font-size: 14px;
+}
 .content h2{
   color: #101828;
   font-size: 30px;
