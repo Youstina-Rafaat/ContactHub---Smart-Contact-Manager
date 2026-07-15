@@ -161,9 +161,10 @@ function displayPerson(){
                     <a href="tel:${details[i].phone}" onclick="showLabel()" class="d-inline-flex justify-content-center align-items-center icon-card-phone rounded-3">
                       <i class="fa-solid fa-phone"></i>
                     </a>
-                    <a href="mailto:${details[i].email}" class="d-inline-flex justify-content-center align-items-center icon-card-email rounded-3">
+                    ${details[i].email ?
+                      `<a href="mailto:${details[i].email}" class="d-inline-flex justify-content-center align-items-center icon-card-email rounded-3">
                       <i class="fa-solid fa-envelope"></i>
-                    </a>
+                    </a>`:""}
                   </div>
                   <div class="ms-auto">
                     <button class="btn rounded-3 px-0 border-0 ${details[i].favorite ? "btn-star-fav":"  btn-fav"} " onclick="favorite(${i})">
