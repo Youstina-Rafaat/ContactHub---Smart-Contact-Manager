@@ -70,7 +70,7 @@ function addPerson(){
   title: "Missing Name",
   text: "Please enter a name for the contact!",
 });
-  }else if(!validNumber()||repeatNumber){
+  }else if(!validNumber()){
       Swal.fire({
   icon: "error",
   title: "Invalid Phone",
@@ -81,6 +81,12 @@ function addPerson(){
   icon: "error",
   title: "Invalid Email",
   text: "Please enter a valid email address",
+});
+  }else if(repeatNumber){
+    Swal.fire({
+  icon: "error",
+  title: "Duplicate Phone Number",
+  text: "A contact with this phone number already exists: Hilda Harvey",
 });
   }
 }
@@ -161,9 +167,10 @@ function displayPerson(){
                     <a href="tel:${details[i].phone}" onclick="showLabel()" class="d-inline-flex justify-content-center align-items-center icon-card-phone rounded-3">
                       <i class="fa-solid fa-phone"></i>
                     </a>
+                    ${details[i].email ?`
                     <a href="mailto:${details[i].email}" class="d-inline-flex justify-content-center align-items-center icon-card-email rounded-3">
                       <i class="fa-solid fa-envelope"></i>
-                    </a>
+                    </a>`:""}
                   </div>
                   <div class="ms-auto">
                     <button class="btn rounded-3 px-0 border-0 ${details[i].favorite ? "btn-star-fav":"  btn-fav"} " onclick="favorite(${i})">
